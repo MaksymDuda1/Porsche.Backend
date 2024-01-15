@@ -1,0 +1,14 @@
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/bin/Debug/net8.0/Porsche.Domain.deps.json
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/bin/Debug/net8.0/Porsche.Domain.runtimeconfig.json
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/bin/Debug/net8.0/Porsche.Domain.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/bin/Debug/net8.0/Porsche.Domain.pdb
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/obj/Debug/net8.0/Porsche.Domain.csproj.AssemblyReference.cache
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/obj/Debug/net8.0/Porsche.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/obj/Debug/net8.0/Porsche.Domain.AssemblyInfoInputs.cache
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/obj/Debug/net8.0/Porsche.Domain.AssemblyInfo.cs
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/obj/Debug/net8.0/Porsche.Domain.csproj.CoreCompileInputs.cache
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/obj/Debug/net8.0/Porsche.Domain.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/obj/Debug/net8.0/refint/Porsche.Domain.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/obj/Debug/net8.0/Porsche.Domain.pdb
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/obj/Debug/net8.0/Porsche.Domain.genruntimeconfig.cache
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Domain/obj/Debug/net8.0/ref/Porsche.Domain.dll

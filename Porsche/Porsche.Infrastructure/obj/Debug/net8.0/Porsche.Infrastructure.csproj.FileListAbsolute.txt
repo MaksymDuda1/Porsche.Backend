@@ -1,0 +1,17 @@
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/bin/Debug/net8.0/Porsche.Infrastructure.deps.json
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/bin/Debug/net8.0/Porsche.Infrastructure.runtimeconfig.json
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/bin/Debug/net8.0/Porsche.Infrastructure.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/bin/Debug/net8.0/Porsche.Infrastructure.pdb
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/bin/Debug/net8.0/Porsche.Domain.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/bin/Debug/net8.0/Porsche.Domain.pdb
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.csproj.AssemblyReference.cache
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.AssemblyInfoInputs.cache
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.AssemblyInfo.cs
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.csproj.CoreCompileInputs.cache
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.csproj.CopyComplete
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/refint/Porsche.Infrastructure.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.pdb
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.genruntimeconfig.cache
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/ref/Porsche.Infrastructure.dll
