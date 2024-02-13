@@ -22,31 +22,11 @@ public class TokenService : ITokenService
         this.context = context;
     }
     
-    public string CreateToken(User entity)
+    public string CreateToken(IList<Claim> claims)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var jwtSecret = configuration["jwtSecret"]!;
         var key = Encoding.ASCII.GetBytes(jwtSecret);
-
-        var userRoles = context.UserRoles
-            .Include(p => p.Role)
-            .Where(p => p.UserId == entity.Id)
-            .ToList();
-
-        var roles = userRoles
-            .Select(p => p.Role).ToList();
-            
-        var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Sid, entity.Id.ToString()),
-            new Claim(ClaimTypes.Email, entity.Email)
-        };
-
-        foreach (var role in roles)
-        {
-            claims.Add(new Claim(ClaimTypes.Role, role.Name));
-        }
-        
         var identity = new ClaimsIdentity(claims);
 
         var tokenDescriptor = new SecurityTokenDescriptor()
@@ -59,5 +39,14 @@ public class TokenService : ITokenService
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
         return tokenHandler.WriteToken(token);
+    }
+
+    public void AddRolesToClaims(List<Claim> claims, IList<string> roles)
+    {
+        foreach (var role in roles)
+        {
+            var roleClaim = new Claim(ClaimTypes.Role, role);
+            claims.Add(roleClaim);
+        }
     }
 }

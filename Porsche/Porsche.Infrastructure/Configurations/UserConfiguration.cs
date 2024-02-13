@@ -11,18 +11,11 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
     {
         builder.HasKey(p => p.Id);
 
-        builder.Property(u => u.FirstName)
-            .HasMaxLength(User.MaxLength);
+        /*builder.Property(u => u.FirstName)
+            .HasMaxLength(RegisterModel.MaxLength);
 
         builder.Property(u => u.SecondName)
-            .HasMaxLength(User.MaxLength);
-        
-        builder.Property(u => u.Email)
-            .HasMaxLength(User.MaxLength)
-            .IsRequired();
-        
-        builder.Property(u => u.Password)
-                    .HasMaxLength(User.MaxLength)
-                    .IsRequired();
+            .HasMaxLength(RegisterModel.MaxLength);*/
+
     }
 }

@@ -117,3 +117,13 @@
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/obj/Debug/net8.0/Porsche.API.sourcelink.json
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Porsche.API.staticwebassets.runtime.json
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.UI.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Embedded.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.Extensions.Identity.Core.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.Extensions.Identity.Stores.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.Extensions.Options.dll

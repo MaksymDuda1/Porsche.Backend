@@ -14,12 +14,12 @@ public class Car
 
     public BodyType BodyType { get; set; }
 
-    public string Engine { get; set; } = null!;
-
+    public string Engine { get; set; } = null!;//винести в окерму таблицю
+    
     public int? PorscheCenterId  { get; set; }
 
     public PorscheCenter? PorscheCenter { get; set; }
 
-    public List<Photo>? Photos { get; set; } = new List<Photo>();
+    public List<CarPhoto>? Photos { get; set; } = new List<CarPhoto>();
 
 }

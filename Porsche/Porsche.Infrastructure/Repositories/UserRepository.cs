@@ -15,34 +15,22 @@ public class UserRepository : IUserRepository
         this.context = context;
     }
 
-    public async Task<List<User>> Get()
+    public async Task<List<UserEntity>> Get()
     {
         var userEntities = await context.Users
             .AsNoTracking()
             .ToListAsync();
         
-        var users = userEntities
-            .Select(p => new User()
-            {
-                Id = p.Id,
-                FirstName = p.FirstName,
-                SecondName = p.SecondName,
-                Email = p.Email,
-                Password = p.Password,
-            }).ToList();
-        
-        return users;
+        return userEntities;
     }
-
-    public async Task<int> Create(User user)
+    public async Task<int> Create(RegisterModel user)
     {
         var userEntity = new UserEntity
         {
-            Id = user.Id,
             FirstName = user.FirstName,
             SecondName = user.SecondName,
             Email = user.Email,
-            Password = user.Password,
+            PasswordHash = user.Password,
         };
 
         await context.Users.AddAsync(userEntity);
@@ -50,8 +38,7 @@ public class UserRepository : IUserRepository
 
         return userEntity.Id;
     }
-
-    public async Task<int> Update(User user)
+    public async Task<int> Update(UserEntity user)
     {
         await context.Users
             .Where(p => p.Id == user.Id)
@@ -60,7 +47,7 @@ public class UserRepository : IUserRepository
                 .SetProperty(p => p.FirstName, p => user.FirstName)
                 .SetProperty(p => p.SecondName, p => user.SecondName)
                 .SetProperty(p => p.Email, p => user.Email)
-                .SetProperty(p => p.Password, p => user.Password));
+                .SetProperty(p => p.PasswordHash, p => user.PasswordHash));
 
         await context.SaveChangesAsync();
 
@@ -75,4 +62,29 @@ public class UserRepository : IUserRepository
 
         return id;
     }
+    
+    /*public async Task<int> AddPhoto(int id, Photo photo)
+    {
+        var existingUser = await context.Users.FindAsync(id);
+
+        if (existingUser == null)
+        {
+            throw new Exception("Car do not exist");
+        }
+
+        var newPhoto = new Photo()
+        {
+            Address = photo.Address,
+        };
+
+        /*if (existingCar.Photos == null)
+        {
+            existingCar.Photos = new List<Photo>();
+        }#1#
+        
+        existingUser..Add(newPhoto);
+        await context.SaveChangesAsync();
+        
+        return existingUser.Id;
+    }*/
 }

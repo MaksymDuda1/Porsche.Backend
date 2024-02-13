@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Porsche.API.Contracts;
 using Porsche.Domain.Abstractions;
@@ -27,8 +28,6 @@ public class CarController: ControllerBase
                 c.Id, c.IdentityCode, c.Model, c.YearOfEdition, c.BodyType,
                 c.Engine, c.PorscheCenter, c.Photos)
             );
-
-        
         
         return Ok(response);
     }
@@ -71,8 +70,6 @@ public class CarController: ControllerBase
             PorscheCenter = request.PorscheCenter,
             Photos = request.Photos
         };
-
-        Console.WriteLine(new string('_',30) + car.Photos[0].Address);
         
         if (car == null)
         {

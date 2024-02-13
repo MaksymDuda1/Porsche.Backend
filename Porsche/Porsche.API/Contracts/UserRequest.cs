@@ -6,5 +6,6 @@ public record UserRequest(
     int Id,
     string FirstName,
     string SecondName,
+    string? Role,
     string Email,
     string Password);

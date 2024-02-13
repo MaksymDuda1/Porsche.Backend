@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Porsche.API.Contracts;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
+using Porsche.Infrastructure.Entities;
 
 namespace Porsche.API.Controllers;
 
@@ -23,7 +24,7 @@ public class UserController : ControllerBase
 
         var response = users
             .Select(u => new UserResponse(u.Id, u.FirstName, u.SecondName,
-                u.Email, u.Password));
+                u.Email, u.PasswordHash));
 
         return Ok(response);
     }
@@ -31,7 +32,7 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<int>> CrateUser([FromBody] UserRequest request)
     {
-        var user = new User()
+        var user = new RegisterModel()
         {
             FirstName = request.FirstName,
             SecondName = request.SecondName,
@@ -52,13 +53,12 @@ public class UserController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<ActionResult<int>> UpdateUser(int id, [FromBody] UserRequest request)
     {
-        var user = new User()
+        var user = new UserEntity()
         {
-            Id = id,
             FirstName = request.FirstName,
             SecondName = request.SecondName,
             Email = request.Email,
-            Password = request.Password,
+            PasswordHash = request.Password,
         };
 
         if (user == null)

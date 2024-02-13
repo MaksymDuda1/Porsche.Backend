@@ -20,7 +20,7 @@ public class CarEntity
 
     public PorscheCenter? PorscheCenter { get; set; }
 
-    public List<Photo>? Photos { get; set; } = new List<Photo>();
+    public List<CarPhoto>? Photos { get; set; } = new List<CarPhoto>();
     
     public Car ToCar()
     {

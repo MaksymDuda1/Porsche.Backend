@@ -19,3 +19,4 @@
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/bin/Debug/net8.0/Porsche.Infrastructure.pdb
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.xml
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.xml
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/obj/Debug/net8.0/Porsche.Application.sourcelink.json

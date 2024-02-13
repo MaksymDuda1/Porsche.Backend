@@ -1,3 +1,7 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Authentication;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
@@ -10,59 +14,75 @@ namespace Porsche.Application.Services;
 public class AuthorizationUserService : IAuthorizationUserService
 {
     private readonly ITokenService tokenService;
-    private readonly PorscheDbContext context;
+    private readonly UserManager<UserEntity> userManager;
+    private readonly SignInManager<UserEntity> signInManager;
 
-    public AuthorizationUserService(ITokenService tokenService, PorscheDbContext context )
+    public AuthorizationUserService(ITokenService tokenService, UserManager<UserEntity> userManager,
+        SignInManager<UserEntity> signInManager)
     {
         this.tokenService = tokenService;
-        this.context = context;
+        this.userManager = userManager;
+        this.signInManager = signInManager;
     }
 
-    public async Task<string> RegisterUser(User user)
+    public async Task<string> RegisterUser(RegisterModel registerModel)
     {
-        var existingUser = await context.Users
-            .FirstOrDefaultAsync(p => p.Email == user.Email);
+        string userName = registerModel.Email;
 
-        if (existingUser != null)
+        var user = new UserEntity()
         {
-             throw new Exception("User already exist");
-        }
-
-        var entity = new UserEntity()
-        {
-            Id = user.Id,
-            FirstName = user.FirstName,
-            SecondName = user.SecondName,
-            Email = user.Email,
-            Password = user.Password,
+            Email = registerModel.Email,
+            UserName = userName,
+            FirstName = registerModel.FirstName,
+            SecondName = registerModel.SecondName
         };
-    
-        await context.AddAsync(entity);
-        await context.SaveChangesAsync();
-        
-        var token = tokenService.CreateToken(entity.ToUser());
-        
-        return token;
-    }
 
-    public async Task<string> LoginUser(User user)
-    {
-        var userEntity = new UserEntity()
-        {
-            Id = user.Id,
-            Email = user.Email,
-            Password = user.Password
-        };  
-        
-        var existingUser = await context.Users
-            .FirstOrDefaultAsync(p => p.Email == userEntity.Email && p.Password == userEntity.Password);
+        Console.WriteLine(user.Email, user.SecondName);
 
-        if (existingUser == null)
+        var result = await userManager.CreateAsync(user, registerModel.Password);
+
+        if (result.Succeeded)
         {
-            throw new Exception("User not exists");
+            await userManager.AddToRoleAsync(user, "ADMIN");
+            var claims = await userManager.GetClaimsAsync(user);
+            
+            return tokenService.CreateToken(claims);
         }
 
-        var token = tokenService.CreateToken(existingUser.ToUser());
+        throw new AuthenticationException("User already exists");
+    }
+
+    public async Task<string> LoginUser(LoginModel loginModel)
+    {
+        var userByEmail = await userManager.FindByEmailAsync(loginModel.Email);
+
+        if (userByEmail == null)
+            throw new AuthenticationException("User do not exist");
+        
+
+        var result = await signInManager
+            .PasswordSignInAsync(userByEmail.UserName, loginModel.Password, false, false);
+        
+        if (!result.Succeeded)
+            throw new AuthenticationException("Wrong pass");
+
+        var authClaims = new List<Claim>()
+        {
+            new Claim(ClaimTypes.Email, loginModel.Email),
+            new Claim(ClaimTypes.Name, userByEmail.UserName),
+            new Claim(JwtRegisteredClaimNames.Jti, userByEmail.Id.ToString())
+        };
+
+        var roles = await userManager.GetRolesAsync(userByEmail);
+        
+        foreach (var role in roles)
+        {
+            Console.WriteLine(role);
+        }
+        tokenService.AddRolesToClaims(authClaims, roles);
+        var token = tokenService.CreateToken(authClaims);
+        
+        await userManager.UpdateAsync(userByEmail);
 
         return token;
     }

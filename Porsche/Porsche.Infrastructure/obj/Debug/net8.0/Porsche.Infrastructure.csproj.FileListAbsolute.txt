@@ -15,3 +15,4 @@
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.pdb
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.genruntimeconfig.cache
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/ref/Porsche.Infrastructure.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Infrastructure/obj/Debug/net8.0/Porsche.Infrastructure.sourcelink.json

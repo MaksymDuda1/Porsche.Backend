@@ -20,17 +20,25 @@ public class RegisterController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> RegisterUser(UserRequest request)
     {
-        var user = new User()
+        try
         {
-            Id = request.Id,
-            FirstName = request.FirstName,
-            SecondName = request.SecondName,
-            Email = request.Email,
-            Password = request.Password
-        };
-            
-        var token = await authorizationService.RegisterUser(user);
+            var user = new RegisterModel()
+            {
+                FirstName = request.FirstName,
+                SecondName = request.SecondName,
+                Email = request.Email,
+                Password = request.Password
+            };
 
-        return Ok(token);
+            Console.WriteLine(user.Email, user.Password);
+            
+            var token = await authorizationService.RegisterUser(user);
+
+            return Ok(token);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

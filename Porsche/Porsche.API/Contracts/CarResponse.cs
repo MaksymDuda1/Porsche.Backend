@@ -1,5 +1,6 @@
 using Porsche.Domain.Enums;
 using Porsche.Domain.Models;
+using Porsche.Infrastructure.Entities;
 
 namespace Porsche.API.Contracts;
 
@@ -11,4 +12,4 @@ public record CarResponse(
     BodyType BodyType,
     string Engine,
     PorscheCenter? PorscheCenter,
-    List<Photo>? Photos);
+    List<CarPhoto>? Photos);

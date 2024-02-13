@@ -20,15 +20,22 @@ public class LoginController: ControllerBase
     [HttpPost]
     public async Task<ActionResult<string>> LoginUser([FromBody] LoginRequest request)
     {
-        var user = new User()
+        try
         {
-            Id = request.Id,
+            var user = new LoginModel()
+        {
             Email = request.Email,
             Password = request.Password
         };
-
+        
         var token = await authorizationService.LoginUser(user);
 
         return Ok(token);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+        
     }
 }

@@ -45,12 +45,13 @@ public class CarRepository : ICarRepository
             YearOfEdition = car.YearOfEdition,
             BodyType = car.BodyType,
             Engine = car.Engine,
+            PorscheCenter = car.PorscheCenter 
         };
         
         var photos = car.Photos?
-            .Select(p => new Photo() { Address = p.Address, Car = car }).ToList();
-
-        carEntity.Photos = photos;
+            .Select(p => new CarPhoto() { Path = p.Path, Car = car }).ToList();
+    
+        carEntity.Photos.AddRange(photos);
   
         await context.AddAsync(carEntity);
         await context.SaveChangesAsync();
@@ -93,5 +94,31 @@ public class CarRepository : ICarRepository
             .ExecuteDeleteAsync();
 
         return id;
+    }
+
+    public async Task<int> AddPhoto(int id, CarPhotoEntity photo)
+    {
+        var existingCar = await context.Cars.FirstOrDefaultAsync(c => c.Id == id);
+
+        if (existingCar == null)
+        {
+            throw new Exception("Car do not exist");
+        }
+
+        var newPhoto = new CarPhoto()
+        {
+            Path = photo.Path,
+            Car = existingCar.ToCar()
+        };
+
+        /*if (existingCar.Photos == null)
+        {
+            existingCar.Photos = new List<Photo>();
+        }*/
+        
+        existingCar.Photos.Add(newPhoto);
+        await context.SaveChangesAsync();
+        
+        return existingCar.Id;
     }
 }
