@@ -48,11 +48,6 @@ public class CarRepository : ICarRepository
             PorscheCenter = car.PorscheCenter 
         };
         
-        var photos = car.Photos?
-            .Select(p => new CarPhoto() { Path = p.Path, Car = car }).ToList();
-    
-        carEntity.Photos.AddRange(photos);
-  
         await context.AddAsync(carEntity);
         await context.SaveChangesAsync();
 

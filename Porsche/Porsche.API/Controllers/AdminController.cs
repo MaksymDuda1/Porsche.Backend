@@ -10,10 +10,11 @@ namespace Porsche.API.Controllers;
 
 [ApiController]
 [Authorize(Roles = "Admin")]
+[Route("admin")]
 public class AdminController: ControllerBase
 {
     private readonly IAdminService adminService;
-
+    
     public AdminController(IAdminService adminService)
     {
         this.adminService = adminService;
