@@ -78,7 +78,7 @@ public class CarRepository : ICarRepository
             return existingCar.Id;
         }
 
-        return 0; 
+        throw new Exception("Car doesn't exist");
     }
 
 

@@ -73,7 +73,7 @@ public class PorscheCenterRepository : IPorscheCenterRepository
             return existingCenter.Id;
         }
 
-        return 0; 
+        throw new Exception("User doesn't exist");
     }
 
     public async Task<int> Delete(int id)
