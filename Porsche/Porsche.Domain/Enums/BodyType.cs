@@ -5,5 +5,4 @@ public enum BodyType
     Coupe,
     Sedan,
     Suv,
-    Сabriolet
-}
+    Cabriolet}

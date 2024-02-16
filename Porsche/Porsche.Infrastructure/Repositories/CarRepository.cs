@@ -45,8 +45,15 @@ public class CarRepository : ICarRepository
             YearOfEdition = car.YearOfEdition,
             BodyType = car.BodyType,
             Engine = car.Engine,
-            PorscheCenter = car.PorscheCenter 
         };
+
+        var porscheCenter = new PorscheCenter()
+        {
+            Name = car.PorscheCenter.Name,
+            Address = car.PorscheCenter.Address,
+        };
+
+        carEntity.PorscheCenter = porscheCenter;
         
         await context.AddAsync(carEntity);
         await context.SaveChangesAsync();
@@ -105,11 +112,6 @@ public class CarRepository : ICarRepository
             Path = photo.Path,
             Car = existingCar.ToCar()
         };
-
-        /*if (existingCar.Photos == null)
-        {
-            existingCar.Photos = new List<Photo>();
-        }*/
         
         existingCar.Photos.Add(newPhoto);
         await context.SaveChangesAsync();

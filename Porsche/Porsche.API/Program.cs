@@ -17,8 +17,6 @@ var jwtSecret = builder.Configuration["jwtSecret"];
 
 var key = Encoding.ASCII.GetBytes(jwtSecret);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
@@ -34,6 +32,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
+
 
 builder.Services.AddIdentity<UserEntity, RoleEntity>(options =>
 {
@@ -78,7 +77,6 @@ builder.Services.AddDbContext<PorscheDbContext>(
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

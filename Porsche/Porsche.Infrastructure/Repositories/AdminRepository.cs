@@ -28,10 +28,17 @@ public class AdminRepository : IAdminRepository
             BodyType = car.BodyType,
             YearOfEdition = car.YearOfEdition,
             Engine = car.Engine,
-            PorscheCenter = car.PorscheCenter,
             Photos = car.Photos
         };
 
+        var porscheCenter = new PorscheCenter
+        {
+            Name = car.PorscheCenter.Name,
+            Address = car.PorscheCenter.Address
+        };
+
+        carEntity.PorscheCenter = porscheCenter;
+        
         if (car == null)
         {
             throw new Exception("Wrong input");

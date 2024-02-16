@@ -2,11 +2,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
-using Porsche.Infrastructure;
-using Porsche.Infrastructure.DTOs;
 using Porsche.Infrastructure.Entities;
 
 namespace Porsche.Application.Services;

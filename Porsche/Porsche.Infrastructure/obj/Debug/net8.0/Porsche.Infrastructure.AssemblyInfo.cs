@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Porsche.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ed899650a6b8783287b02171d87eca459e101b5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b614ac903ad69e940a942e32772646920de900af")]
 [assembly: System.Reflection.AssemblyProductAttribute("Porsche.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Porsche.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
