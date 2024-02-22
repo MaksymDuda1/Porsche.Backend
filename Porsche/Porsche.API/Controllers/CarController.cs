@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Porsche.API.Contracts;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
+using Porsche.Infrastructure.Entities;
 
 namespace Porsche.API.Controllers;
 
@@ -35,7 +36,7 @@ public class CarController: ControllerBase
     [HttpPost]
     public async Task<ActionResult<int>> CreateCar([FromBody] CarRequest request)
     {
-        var car = new Car()
+        var car = new CarEntity()
         {
             IdentityCode = request.IdentityCode,
             Model = request.Model,
@@ -59,7 +60,7 @@ public class CarController: ControllerBase
     [HttpPut("{id:int}")]
     public async Task<ActionResult<int>> UpdateCar(int id, [FromBody] CarRequest request)
     {
-        var car = new Car()
+        var car = new CarEntity()
         {
             Id = id,
             IdentityCode = request.IdentityCode,

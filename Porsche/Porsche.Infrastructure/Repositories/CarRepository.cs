@@ -14,11 +14,11 @@ public class CarRepository : ICarRepository
         this.context = context;
     }
 
-    public async Task<List<Car>> Get()
+    public async Task<List<CarEntity>> Get()
     {
         var cars = await context.Cars
             .Include(c => c.Photos)
-            .Select(p => new Car()
+            .Select(p => new CarEntity()
             {
                 Id = p.Id,
                 IdentityCode = p.IdentityCode,
@@ -35,7 +35,7 @@ public class CarRepository : ICarRepository
     }
 
 
-    public async Task<int> Create(Car car)
+    public async Task<int> Create(CarEntity car)
     {
         var carEntity = new CarEntity()
         {
@@ -47,45 +47,48 @@ public class CarRepository : ICarRepository
             Engine = car.Engine,
         };
 
-        var porscheCenter = new PorscheCenter()
+        if (car.PorscheCenter != null)
         {
-            Name = car.PorscheCenter.Name,
-            Address = car.PorscheCenter.Address,
-        };
+            var porscheCenter = new PorscheCenterEntity()
+            {
+                Name = car.PorscheCenter.Name,
+                Address = car.PorscheCenter.Address
+            };
 
-        carEntity.PorscheCenter = porscheCenter;
-        
-        await context.AddAsync(carEntity);
+            carEntity.PorscheCenter = porscheCenter;
+        }
+
+        await context.Cars.AddAsync(carEntity);
         await context.SaveChangesAsync();
 
         return carEntity.Id;
     }
 
-    public async Task<int> Update(Car car)
+    public async Task<int> Update(CarEntity car)
     {
         var existingCar = await context.Cars
             .Include(c => c.PorscheCenter)
             .Include(c => c.Photos)
             .FirstOrDefaultAsync(p => p.Id == car.Id);
 
-        if (existingCar != null)
+        if (existingCar == null)
         {
-            existingCar.IdentityCode = car.IdentityCode;
-            existingCar.Model = car.Model;
-            existingCar.BodyType = car.BodyType;
-            existingCar.Engine = car.Engine;
-
-            if (existingCar.PorscheCenter != null && car.PorscheCenter != null)
-            {
-                existingCar.PorscheCenter.Name = car.PorscheCenter.Name;
-                existingCar.PorscheCenter.Address = car.PorscheCenter.Address;
-            }
-            
-            await context.SaveChangesAsync();
-            return existingCar.Id;
+            throw new Exception("Car doesn't exist");
         }
 
-        throw new Exception("Car doesn't exist");
+        existingCar.IdentityCode = car.IdentityCode;
+        existingCar.Model = car.Model;
+        existingCar.BodyType = car.BodyType;
+        existingCar.Engine = car.Engine;
+
+        if (existingCar.PorscheCenter != null && car.PorscheCenter != null)
+        {
+            existingCar.PorscheCenter.Name = car.PorscheCenter.Name;
+            existingCar.PorscheCenter.Address = car.PorscheCenter.Address;
+        }
+
+        await context.SaveChangesAsync();
+        return existingCar.Id;
     }
 
 
@@ -98,24 +101,4 @@ public class CarRepository : ICarRepository
         return id;
     }
 
-    public async Task<int> AddPhoto(int id, CarPhotoEntity photo)
-    {
-        var existingCar = await context.Cars.FirstOrDefaultAsync(c => c.Id == id);
-
-        if (existingCar == null)
-        {
-            throw new Exception("Car do not exist");
-        }
-
-        var newPhoto = new CarPhoto()
-        {
-            Path = photo.Path,
-            Car = existingCar.ToCar()
-        };
-        
-        existingCar.Photos.Add(newPhoto);
-        await context.SaveChangesAsync();
-        
-        return existingCar.Id;
-    }
 }

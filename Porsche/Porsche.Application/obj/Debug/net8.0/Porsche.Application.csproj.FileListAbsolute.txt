@@ -8,7 +8,6 @@
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/obj/Debug/net8.0/Porsche.Application.AssemblyInfoInputs.cache
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/obj/Debug/net8.0/Porsche.Application.AssemblyInfo.cs
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/obj/Debug/net8.0/Porsche.Application.csproj.CoreCompileInputs.cache
-/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/obj/Debug/net8.0/Porsche.Application.csproj.CopyComplete
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/obj/Debug/net8.0/Porsche.Application.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/obj/Debug/net8.0/refint/Porsche.Application.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/obj/Debug/net8.0/Porsche.Application.pdb
@@ -20,3 +19,4 @@
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.xml
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.xml
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/obj/Debug/net8.0/Porsche.Application.sourcelink.json
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.Application/obj/Debug/net8.0/Porsche..1BD03F4B.Up2Date

@@ -11,5 +11,5 @@ public record SearchRequest(
     int? MinYearOfRelease,
     int? MaxYearOfRelease,
     string? Engine,
-    PorscheCenter? PorscheCenter
+    string? PorscheCenter
     );

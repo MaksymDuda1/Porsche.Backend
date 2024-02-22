@@ -18,21 +18,7 @@ public class CarEntity
 
     public int? PorscheCenterId  { get; set; }
 
-    public PorscheCenter? PorscheCenter { get; set; }
+    public PorscheCenterEntity? PorscheCenter { get; set; }
 
-    public List<CarPhoto>? Photos { get; set; } = new List<CarPhoto>();
-    
-    public Car ToCar()
-    {
-        return new Car()
-        {
-            Id = this.Id,
-            IdentityCode = this.IdentityCode,
-            Model = this.Model,
-            YearOfEdition = this.YearOfEdition,
-            BodyType = this.BodyType,
-            Engine = this.Engine
-        };
-    }
-    
+    public List<CarPhotoEntity>? Photos { get; set; } = new List<CarPhotoEntity>();    
 }

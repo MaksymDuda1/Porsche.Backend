@@ -18,7 +18,6 @@ var jwtSecret = builder.Configuration["jwtSecret"];
 var key = Encoding.ASCII.GetBytes(jwtSecret);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IUserService, UserService>();
@@ -79,8 +78,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+   
 }
 
 app.UseHttpsRedirection();

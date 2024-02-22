@@ -1,11 +1,12 @@
 using Porsche.Domain.Models;
+using Porsche.Infrastructure.Entities;
 
 namespace Porsche.Domain.Abstractions;
 
 public interface IPorscheCenterRepository
 {
-    Task<List<PorscheCenter>> Get();
-    Task<int> Create(PorscheCenter porscheCenter);
-    Task<int> Update(PorscheCenter porscheCenter);
+    Task<List<PorscheCenterEntity>> Get();
+    Task<int> Create(PorscheCenterEntity porscheCenter);
+    Task<int> Update(PorscheCenterEntity porscheCenter);
     Task<int> Delete(int id);
 }

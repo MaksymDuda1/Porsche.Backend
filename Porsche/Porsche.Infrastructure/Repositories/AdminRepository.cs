@@ -19,8 +19,11 @@ public class AdminRepository : IAdminRepository
         this.userManager = userManager;
     }
 
-    public async Task<int> AddCar(Car car)
+    public async Task<int> AddCar(CarEntity car)
     {
+        if (car == null)
+            throw new Exception();
+        
         var carEntity = new CarEntity()
         {
             IdentityCode = car.IdentityCode,
@@ -28,16 +31,29 @@ public class AdminRepository : IAdminRepository
             BodyType = car.BodyType,
             YearOfEdition = car.YearOfEdition,
             Engine = car.Engine,
-            Photos = car.Photos
         };
 
-        var porscheCenter = new PorscheCenter
+        if (car.Photos != null)
         {
-            Name = car.PorscheCenter.Name,
-            Address = car.PorscheCenter.Address
-        };
+            var photos = car.Photos.Select(c => new CarPhotoEntity()
+            {
+                Path = c.Path,
+                CarId = c.CarId
+            });
+            
+            carEntity.Photos.AddRange(photos);
+        }
 
-        carEntity.PorscheCenter = porscheCenter;
+        if (car.PorscheCenter != null)
+        {
+            var porscheCenter = new PorscheCenterEntity()
+            {
+                Name = car.PorscheCenter.Name,
+                Address = car.PorscheCenter.Address
+            };
+
+            carEntity.PorscheCenter = porscheCenter;
+        }
         
         if (car == null)
         {
@@ -50,7 +66,7 @@ public class AdminRepository : IAdminRepository
         return carEntity.Id;
     }
 
-    public async Task<int> UpdateCar(Car car)
+    public async Task<int> UpdateCar(CarEntity car)
     {
 
         Console.WriteLine(car.Id);
@@ -74,7 +90,7 @@ public class AdminRepository : IAdminRepository
         }
 
         var photos = car.Photos?
-            .Select(p => new CarPhoto() {Path  = p.Path, Car = car }).ToList();
+            .Select(p => new CarPhotoEntity() {Path  = p.Path, Car = existingCar }).ToList();
     
         existingCar.Photos = photos;
   

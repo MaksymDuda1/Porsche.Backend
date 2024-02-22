@@ -9,18 +9,17 @@ namespace Porsche.Infrastructure;
 public class PorscheDbContext : IdentityDbContext<UserEntity, RoleEntity, int>
 {
     public PorscheDbContext(DbContextOptions<PorscheDbContext> options)
-    :base(options)
+        : base(options)
     {
-        
     }
 
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<CarEntity> Cars { get; set; }
-    
+
     public DbSet<CarPhotoEntity> CarPhotos { get; set; }
     public DbSet<UserPhotoEntity> UserPhotos { get; set; }
     public DbSet<PorscheCenterEntity> PorscheCenters { get; set; }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -39,5 +38,16 @@ public class PorscheDbContext : IdentityDbContext<UserEntity, RoleEntity, int>
                     Name = "Admin",
                     NormalizedName = "ADMIN"
                 });
+        ;
+
+        modelBuilder.Entity<CarEntity>()
+            .HasData(new CarEntity()
+            {
+                Id = 88,
+                IdentityCode = "someIdentityCode",
+                Model = "911",
+                BodyType = 0,
+                Engine = "someEngine"
+            });
     }
 }

@@ -54,7 +54,7 @@ public class AuthorizationUserService : IAuthorizationUserService
         var userByEmail = await userManager.FindByEmailAsync(loginModel.Email);
 
         if (userByEmail == null)
-            throw new AuthenticationException("User do not exist");
+            throw new AuthenticationException("User does not exist");
         
 
         var result = await signInManager

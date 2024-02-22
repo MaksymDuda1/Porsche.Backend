@@ -13,12 +13,12 @@ public class AdminService : IAdminService
         this.adminRepository = adminRepository;
     }
     
-    public Task<int> AddCar(Car car)
+    public Task<int> AddCar(CarEntity car)
     {
         return adminRepository.AddCar(car);
     }
 
-    public Task<int> UpdateCar(Car car)
+    public Task<int> UpdateCar(CarEntity car)
     {
         return adminRepository.UpdateCar(car);
     }

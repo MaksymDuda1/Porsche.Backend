@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using Porsche.API.Contracts;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
+using Porsche.Infrastructure.Entities;
 
 namespace Porsche.API.Controllers;
 
 [ApiController]
 [Route("api/porscheCenter")]
-public class PorscheCenterController: ControllerBase
+public class PorscheCenterController : ControllerBase
 {
     private readonly IPorscheCenterService porscheCenterService;
 
@@ -15,7 +16,7 @@ public class PorscheCenterController: ControllerBase
     {
         this.porscheCenterService = porscheCenterService;
     }
-    
+
     [HttpGet]
     public async Task<ActionResult<List<PorscheCenterResponse>>> GetAllPorscheCentres()
     {
@@ -31,17 +32,12 @@ public class PorscheCenterController: ControllerBase
     [HttpPost]
     public async Task<ActionResult<int>> CreatePorscheCenter([FromBody] PorscheCenterRequest request)
     {
-        var porscheCenter = new PorscheCenter()
+        var porscheCenter = new PorscheCenterEntity()
         {
             Name = request.Name,
             Address = request.Address,
             Cars = request.Cars
         };
-
-        if (porscheCenter == null)
-        {
-            return BadRequest();
-        }
 
         var id = await porscheCenterService.CreatePorscheCenter(porscheCenter);
 
@@ -51,7 +47,7 @@ public class PorscheCenterController: ControllerBase
     [HttpPut("{id:int}")]
     public async Task<ActionResult<int>> UpdatePorscheCenter(int id, [FromBody] PorscheCenterRequest request)
     {
-        var porscheCenter = new PorscheCenter()
+        var porscheCenter = new PorscheCenterEntity()
         {
             Id = id,
             Name = request.Name,
@@ -73,5 +69,4 @@ public class PorscheCenterController: ControllerBase
     {
         return await porscheCenterService.DeletePorscheCenter(id);
     }
-
 }

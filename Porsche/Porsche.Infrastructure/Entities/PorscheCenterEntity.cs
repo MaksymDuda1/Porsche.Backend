@@ -10,5 +10,5 @@ public class PorscheCenterEntity
 
     public string Address { get; set; } = null!;
 
-    public List<Car>? Cars { get; set; } = new List<Car>();
+    public List<CarEntity>? Cars { get; set; } = new List<CarEntity>();
 }

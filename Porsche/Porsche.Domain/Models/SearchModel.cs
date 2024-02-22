@@ -9,5 +9,5 @@ public class SearchModel
     public int? MinYearOfRelease { get; set; }
     public int? MaxYearOfRelease { get; set; }
     public string? Engine { get; set; }
-    public PorscheCenter? PorscheCenter { get; set; }
+    public string? PorscheCenter { get; set; }
 }

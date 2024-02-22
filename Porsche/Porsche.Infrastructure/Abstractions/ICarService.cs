@@ -1,11 +1,12 @@
 using Porsche.Domain.Models;
+using Porsche.Infrastructure.Entities;
 
 namespace Porsche.Domain.Abstractions;
 
 public interface ICarService
 {
-    Task<List<Car>> GetAllCars();
-    Task<int> CreateCar(Car car);
-    Task<int> UpdateCar(Car car);
+    Task<List<CarEntity>> GetAllCars();
+    Task<int> CreateCar(CarEntity car);
+    Task<int> UpdateCar(CarEntity car);
     Task<int> DeleteCar(int id);
 }

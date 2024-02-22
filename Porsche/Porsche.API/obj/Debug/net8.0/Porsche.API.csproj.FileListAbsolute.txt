@@ -21,9 +21,6 @@
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Mono.TextTemplating.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Npgsql.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
-/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
-/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
-/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/System.CodeDom.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/System.Composition.AttributedModel.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/System.Composition.Convention.dll
@@ -101,7 +98,6 @@
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.Porsche.API.props
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/obj/Debug/net8.0/staticwebassets.pack.json
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/obj/Debug/net8.0/scopedcss/bundle/Porsche.API.styles.css
-/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/obj/Debug/net8.0/Porsche.API.csproj.CopyComplete
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/obj/Debug/net8.0/Porsche.API.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/obj/Debug/net8.0/refint/Porsche.API.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/obj/Debug/net8.0/Porsche.API.pdb
@@ -127,3 +123,4 @@
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.Extensions.Identity.Core.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.Extensions.Identity.Stores.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/obj/Debug/net8.0/Porsche..45AA92F2.Up2Date

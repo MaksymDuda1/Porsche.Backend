@@ -11,5 +11,5 @@ public record CarRequest(
     int YearOfEdition,
     BodyType BodyType,
     string Engine,
-    PorscheCenter? PorscheCenter,
-    List<CarPhoto>? Photos);
+    PorscheCenterEntity? PorscheCenter,
+    List<CarPhotoEntity>? Photos);

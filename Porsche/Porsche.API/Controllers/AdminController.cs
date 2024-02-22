@@ -24,7 +24,7 @@ public class AdminController: ControllerBase
     [Route("api/admin/cars")]
     public async Task<ActionResult<int>> CreateCar(CarRequest request)
     {
-        var car = new Car()
+        var car = new CarEntity()
         {
             IdentityCode = request.IdentityCode,
             Model = request.Model,
@@ -49,7 +49,7 @@ public class AdminController: ControllerBase
     [Route("api/admin/cars")]
     public async Task<ActionResult<int>> UpdateCar([FromBody] CarRequest request)
     {
-        var car = new Car()
+        var car = new CarEntity()
         {
             Id = request.Id,
             IdentityCode = request.IdentityCode,

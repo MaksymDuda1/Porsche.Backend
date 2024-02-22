@@ -1,13 +1,14 @@
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure.Abstractions;
+using Porsche.Infrastructure.Entities;
 
 namespace Porsche.Application.Services;
 
 public class SearchService : ISearchService
 {
     private readonly ICarService carService;
-    private List<Car> cars;
+    private List<CarEntity> cars;
     
     public SearchService(ICarService carService)
     {
@@ -19,7 +20,7 @@ public class SearchService : ISearchService
         this.cars =  await carService.GetAllCars();
     }
 
-    public async Task<List<Car>> SearchCars(SearchModel searchModel)
+    public async Task<List<CarEntity>> SearchCars(SearchModel searchModel)
     {
         cars = await carService.GetAllCars();
 
@@ -41,7 +42,7 @@ public class SearchService : ISearchService
             query = query.Where(c => c.Engine == searchModel.Engine);
         
         if (searchModel.PorscheCenter != null) 
-            query = query.Where(c => c.PorscheCenter == searchModel.PorscheCenter);
+            query = query.Where(c => c.PorscheCenter.Name == searchModel.PorscheCenter);
         
         return query.ToList();
     }

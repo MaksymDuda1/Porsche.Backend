@@ -5,8 +5,8 @@ namespace Porsche.Infrastructure.Repositories;
 
 public interface IAdminRepository
 {
-    Task<int> AddCar(Car car);
-    Task<int> UpdateCar(Car car);
+    Task<int> AddCar(CarEntity car);
+    Task<int> UpdateCar(CarEntity car);
     Task<int> DeleteCar(int id);
     Task<int> CreateUser(RegisterModel user, string roleName);
     
