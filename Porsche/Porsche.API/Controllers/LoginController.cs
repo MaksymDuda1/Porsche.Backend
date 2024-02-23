@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Porsche.API.Contracts;
+using Porsche.Application.Abstractions;
 using Porsche.Application.Services;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
@@ -22,13 +23,8 @@ public class LoginController : ControllerBase
     {
         try
         {
-            var user = new LoginModel()
-            {
-                Email = request.Email,
-                Password = request.Password
-            };
-
-            var token = await authorizationService.LoginUser(user);
+          
+            var token = await authorizationService.LoginUser(request);
 
             return Ok(token);
         }

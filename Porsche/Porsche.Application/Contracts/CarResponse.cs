@@ -10,6 +10,6 @@ public record CarResponse(
     string Model,
     int YearOfEdition,
     BodyType BodyType,
-    string Engine,
+    EngineEntity Engine,
     PorscheCenterEntity? PorscheCenter,
     List<CarPhotoEntity>? Photos);

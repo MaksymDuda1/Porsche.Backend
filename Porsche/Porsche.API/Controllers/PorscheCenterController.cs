@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Porsche.API.Contracts;
+using Porsche.Application.Abstractions;
+using Porsche.Application.Contracts;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure.Entities;
@@ -32,14 +34,7 @@ public class PorscheCenterController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<int>> CreatePorscheCenter([FromBody] PorscheCenterRequest request)
     {
-        var porscheCenter = new PorscheCenterEntity()
-        {
-            Name = request.Name,
-            Address = request.Address,
-            Cars = request.Cars
-        };
-
-        var id = await porscheCenterService.CreatePorscheCenter(porscheCenter);
+        var id = await porscheCenterService.CreatePorscheCenter(request);
 
         return Ok(id);
     }
@@ -47,19 +42,7 @@ public class PorscheCenterController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<ActionResult<int>> UpdatePorscheCenter(int id, [FromBody] PorscheCenterRequest request)
     {
-        var porscheCenter = new PorscheCenterEntity()
-        {
-            Id = id,
-            Name = request.Name,
-            Address = request.Address,
-        };
-
-        if (porscheCenter == null)
-        {
-            return BadRequest();
-        }
-
-        await porscheCenterService.UpdatePorscheCenter(porscheCenter);
+        await porscheCenterService.UpdatePorscheCenter(request);
 
         return Ok(id);
     }
@@ -68,5 +51,11 @@ public class PorscheCenterController : ControllerBase
     public async Task<ActionResult<int>> DeletePorscheCenter(int id)
     {
         return await porscheCenterService.DeletePorscheCenter(id);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<int>> AddCarToPorscheCenter([FromBody] CarAddingRequest request)
+    {
+        return await porscheCenterService.AddCarToPorscheCenter(request);
     }
 }

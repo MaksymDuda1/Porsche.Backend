@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
-using Porsche.API.Contracts;
-using Porsche.Domain.Abstractions;
-using Porsche.Domain.Models;
+using Porsche.Application.Abstractions;
+using Porsche.Application.Contracts;
+
 
 namespace Porsche.API.Controllers;
 
@@ -18,21 +18,11 @@ public class RegisterController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> RegisterUser(UserRequest request)
+    public async Task<IActionResult> RegisterUser(RegisterRequest request)
     {
         try
         {
-            var user = new RegisterModel()
-            {
-                FirstName = request.FirstName,
-                SecondName = request.SecondName,
-                Email = request.Email,
-                Password = request.Password
-            };
-
-            Console.WriteLine(user.Email, user.Password);
-            
-            var token = await authorizationService.RegisterUser(user);
+            var token = await authorizationService.RegisterUser(request);
 
             return Ok(token);
         }

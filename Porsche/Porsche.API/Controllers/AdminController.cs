@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Porsche.API.Contracts;
+using Porsche.Application.Abstractions;
+using Porsche.Application.Contracts;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure.Entities;
 using Porsche.Infrastructure.Repositories;
@@ -24,23 +26,7 @@ public class AdminController: ControllerBase
     [Route("api/admin/cars")]
     public async Task<ActionResult<int>> CreateCar(CarRequest request)
     {
-        var car = new CarEntity()
-        {
-            IdentityCode = request.IdentityCode,
-            Model = request.Model,
-            YearOfEdition = request.YearOfEdition,
-            BodyType = request.BodyType,
-            Engine = request.Engine,
-            PorscheCenter = request.PorscheCenter,
-            Photos = request.Photos
-        };
-        
-        if (car == null)
-        {
-            return BadRequest();
-        }
-        
-        var id = await adminService.AddCar(car);
+        var id = await adminService.AddCar(request);
 
         return Ok(id);
     }
@@ -49,26 +35,10 @@ public class AdminController: ControllerBase
     [Route("api/admin/cars")]
     public async Task<ActionResult<int>> UpdateCar([FromBody] CarRequest request)
     {
-        var car = new CarEntity()
-        {
-            Id = request.Id,
-            IdentityCode = request.IdentityCode,
-            Model = request.Model,
-            YearOfEdition = request.YearOfEdition,
-            BodyType = request.BodyType,
-            Engine = request.Engine,
-            PorscheCenter = request.PorscheCenter,
-            Photos = request.Photos
-        };
-        
-        if (car == null)
-        {
-            return BadRequest();
-        }
 
-        await adminService.UpdateCar(car);
+        var id =await adminService.UpdateCar(request);
 
-        return Ok(car.Id);
+        return Ok(id);
     }
     
     [Route("api/admin/cars")]
@@ -78,49 +48,7 @@ public class AdminController: ControllerBase
         return await adminService.DeleteCar(id);
     }
     
-    [Route("api/admin/users")]
-    [HttpPost]
-    public async Task<ActionResult<int>> CrateUser([FromBody] UserRequest request)
-    {
-        var user = new RegisterModel()
-        {
-            FirstName = request.FirstName,
-            SecondName = request.SecondName,
-            Email = request.Email,
-            Password = request.Password,
-        };
-
-        if (user == null)
-        {
-            return BadRequest();
-        }
-
-        var id = await adminService.CreateUser(user, request.Role );
-
-        return Ok(id);
-    }
     
-    [Route("api/admin/users")]
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult<int>> UpdateUser(int id, [FromBody] UserRequest request)
-    {
-        var user = new UserEntity()
-        {
-            FirstName = request.FirstName,
-            SecondName = request.SecondName,
-            Email = request.Email,
-            PasswordHash = request.Password,
-        };
-
-        if (user == null)
-        {
-            return BadRequest();
-        }
-        
-        await adminService.UpdateUser(user, request.Role);
-
-        return Ok(id);
-    }
     
     [Route("api/admin/users")]
     [HttpDelete("{id:int}")]

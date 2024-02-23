@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Porsche.API.Contracts;
+using Porsche.Application.Abstractions;
+using Porsche.Application.Contracts;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure.Entities;
@@ -36,23 +38,8 @@ public class CarController: ControllerBase
     [HttpPost]
     public async Task<ActionResult<int>> CreateCar([FromBody] CarRequest request)
     {
-        var car = new CarEntity()
-        {
-            IdentityCode = request.IdentityCode,
-            Model = request.Model,
-            YearOfEdition = request.YearOfEdition,
-            BodyType = request.BodyType,
-            Engine = request.Engine,
-            PorscheCenter = request.PorscheCenter,
-            Photos = request.Photos
-        };
         
-        if (car == null)
-        {
-            return BadRequest();
-        }
-        
-        var id = await carService.CreateCar(car);
+        var id = await carService.CreateCar(request);
 
         return Ok(id);
     }
@@ -60,24 +47,7 @@ public class CarController: ControllerBase
     [HttpPut("{id:int}")]
     public async Task<ActionResult<int>> UpdateCar(int id, [FromBody] CarRequest request)
     {
-        var car = new CarEntity()
-        {
-            Id = id,
-            IdentityCode = request.IdentityCode,
-            Model = request.Model,
-            YearOfEdition = request.YearOfEdition,
-            BodyType = request.BodyType,
-            Engine = request.Engine,
-            PorscheCenter = request.PorscheCenter,
-            Photos = request.Photos
-        };
-        
-        if (car == null)
-        {
-            return BadRequest();
-        }
-
-        await carService.UpdateCar(car);
+        await carService.UpdateCar(request);
 
         return Ok(id);
     }

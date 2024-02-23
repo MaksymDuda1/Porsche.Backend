@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Porsche.Application.Abstractions;
 using Porsche.Application.Services;
 using Porsche.Domain.Abstractions;
-using Porsche.Domain.Models;
 using Porsche.Infrastructure;
-using Porsche.Infrastructure.Abstractions;
 using Porsche.Infrastructure.Entities;
 using Porsche.Infrastructure.Repositories;
 
