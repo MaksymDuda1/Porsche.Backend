@@ -9,19 +9,18 @@ using Porsche.Infrastructure.Repositories;
 
 namespace Porsche.API.Controllers;
 
-
 [ApiController]
 [Authorize(Roles = "Admin")]
 [Route("admin")]
-public class AdminController: ControllerBase
+public class AdminController : ControllerBase
 {
     private readonly IAdminService adminService;
-    
+
     public AdminController(IAdminService adminService)
     {
         this.adminService = adminService;
     }
-    
+
     [HttpPost]
     [Route("api/admin/cars")]
     public async Task<ActionResult<int>> CreateCar(CarRequest request)
@@ -30,30 +29,49 @@ public class AdminController: ControllerBase
 
         return Ok(id);
     }
-    
+
     [HttpPut]
     [Route("api/admin/cars")]
     public async Task<ActionResult<int>> UpdateCar([FromBody] CarRequest request)
     {
+        try
+        {
+            var id = await adminService.UpdateCar(request);
 
-        var id =await adminService.UpdateCar(request);
-
-        return Ok(id);
+            return Ok(id);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
-    
+
     [Route("api/admin/cars")]
     [HttpDelete("{id:int}")]
     public async Task<ActionResult<int>> DeleteCar(int id)
     {
-        return await adminService.DeleteCar(id);
+        try
+        {
+            return await adminService.DeleteCar(id);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
-    
-    
-    
+
+
     [Route("api/admin/users")]
     [HttpDelete("{id:int}")]
     public async Task<ActionResult<int>> DeleteUser(int id)
     {
-        return Ok(await adminService.DeleteUser(id));
+        try
+        {
+            return Ok(await adminService.DeleteUser(id));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

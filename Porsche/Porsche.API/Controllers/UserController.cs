@@ -21,12 +21,19 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<UserResponse>>> GetUsers()
     {
-        var users = await userService.GetAllUsers();
+        try
+        {
+            var users = await userService.GetAllUsers();
 
-        var response = users
-            .Select(u => new UserResponse(u.Id, u.FirstName, u.SecondName,
-                u.Email, u.PasswordHash));
+            var response = users
+                .Select(u => new UserResponse(u.Id, u.FirstName, u.SecondName,
+                    u.Email, u.PasswordHash));
 
-        return Ok(response);
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

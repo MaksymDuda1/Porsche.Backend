@@ -23,7 +23,6 @@ public class LoginController : ControllerBase
     {
         try
         {
-          
             var token = await authorizationService.LoginUser(request);
 
             return Ok(token);

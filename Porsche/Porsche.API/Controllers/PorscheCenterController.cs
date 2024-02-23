@@ -22,40 +22,75 @@ public class PorscheCenterController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<PorscheCenterResponse>>> GetAllPorscheCentres()
     {
-        var porscheCentres = await porscheCenterService.GetAllPorscheCenters();
+        try
+        {
+            var porscheCentres = await porscheCenterService.GetAllPorscheCenters();
 
-        var response = porscheCentres
-            .Select(p => new PorscheCenterResponse(
-                p.Id, p.Name, p.Address, p.Cars));
+            var response = porscheCentres
+                .Select(p => new PorscheCenterResponse(
+                    p.Id, p.Name, p.Address, p.Cars));
 
-        return Ok(response);
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost]
     public async Task<ActionResult<int>> CreatePorscheCenter([FromBody] PorscheCenterRequest request)
     {
-        var id = await porscheCenterService.CreatePorscheCenter(request);
+        try
+        {
+            var id = await porscheCenterService.CreatePorscheCenter(request);
 
-        return Ok(id);
+            return Ok(id);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPut("{id:int}")]
     public async Task<ActionResult<int>> UpdatePorscheCenter(int id, [FromBody] PorscheCenterRequest request)
     {
-        await porscheCenterService.UpdatePorscheCenter(request);
+        try
+        {
+            await porscheCenterService.UpdatePorscheCenter(request);
 
-        return Ok(id);
+            return Ok(id);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpDelete("{id:int}")]
     public async Task<ActionResult<int>> DeletePorscheCenter(int id)
     {
-        return await porscheCenterService.DeletePorscheCenter(id);
+        try
+        {
+            return await porscheCenterService.DeletePorscheCenter(id);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost]
     public async Task<ActionResult<int>> AddCarToPorscheCenter([FromBody] CarAddingRequest request)
     {
-        return await porscheCenterService.AddCarToPorscheCenter(request);
+        try
+        {
+            return await porscheCenterService.AddCarToPorscheCenter(request);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }
