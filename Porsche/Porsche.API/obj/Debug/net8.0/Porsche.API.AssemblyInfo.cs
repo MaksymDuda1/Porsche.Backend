@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Porsche.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+01c440f550a2000fe984c38367e1aad42cb1e7f7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+60a8c53a13d48bf166a1ac660fd8ba75a858d2d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Porsche.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Porsche.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

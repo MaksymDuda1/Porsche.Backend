@@ -81,8 +81,8 @@ public class PorscheCenterController : ControllerBase
         }
     }
 
-    [HttpPost]
-    public async Task<ActionResult<int>> AddCarToPorscheCenter([FromBody] CarAddingRequest request)
+    [HttpPost("AddToCenter")]
+    public async Task<ActionResult<int>> AddCarToPorscheCenter([FromBody] AddingCarToThePorscheCenterRequest request)
     {
         try
         {

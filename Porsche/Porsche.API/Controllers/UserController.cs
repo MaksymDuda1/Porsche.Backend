@@ -27,7 +27,7 @@ public class UserController : ControllerBase
 
             var response = users
                 .Select(u => new UserResponse(u.Id, u.FirstName, u.SecondName,
-                    u.Email, u.PasswordHash));
+                    u.Email, u.PasswordHash, u.Photo));
 
             return Ok(response);
         }

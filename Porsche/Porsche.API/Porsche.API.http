@@ -1,6 +1,0 @@
-@Porsche.API_HostAddress = http://localhost:5083
-
-GET {{Porsche.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

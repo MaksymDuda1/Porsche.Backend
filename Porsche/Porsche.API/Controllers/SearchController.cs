@@ -23,8 +23,9 @@ public class SearchController : ControllerBase
         {
             var suitableCars = await searchService.SearchCars(request);
 
-            var response = suitableCars.Select(c => new CarResponse(c.Id, c.IdentityCode, c.Model,
-                c.YearOfEdition, c.BodyType, c.Engine, c.PorscheCenter, c.Photos)).ToList();
+            var response = suitableCars
+                .Select(c => new CarResponse(c.Id, c.IdentityCode, c.Model, c.YearOfEdition,
+                    c.BodyType, c.Color, c.Engine, c.Price, c.PorscheCenterId, c.Photos)).ToList();
 
             if (response.Count == 0)
             {

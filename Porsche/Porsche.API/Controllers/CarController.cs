@@ -30,7 +30,7 @@ public class CarController : ControllerBase
             var response = cars
                 .Select(c => new CarResponse(
                     c.Id, c.IdentityCode, c.Model, c.YearOfEdition, c.BodyType,
-                    c.Engine, c.PorscheCenter, c.Photos)
+                    c.Color, c.Engine, c.Price, c.PorscheCenterId, c.Photos)
                 );
 
             return Ok(response);

@@ -124,3 +124,5 @@
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.Extensions.Identity.Stores.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
 /home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/obj/Debug/net8.0/Porsche..45AA92F2.Up2Date
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/AWSSDK.Core.dll
+/home/maksi/Studying/Porsche/Porsche.Backend/src/Porsche/Porsche.API/bin/Debug/net8.0/AWSSDK.S3.dll
