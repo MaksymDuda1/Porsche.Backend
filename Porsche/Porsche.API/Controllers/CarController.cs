@@ -30,9 +30,34 @@ public class CarController : ControllerBase
             var response = cars
                 .Select(c => new CarResponse(
                     c.Id, c.IdentityCode, c.Model, c.YearOfEdition, c.BodyType,
-                    c.Color, c.Engine, c.Price, c.PorscheCenterId, c.Photos)
+                    c.Color, c.Engine, c.FuelConsumption ,c.Price,c.IsAvailable, c.PorscheCenterId, c.Photos)
                 );
 
+            foreach (var carResponse in response)
+            {
+                Console.WriteLine(carResponse.PorscheCenterId);
+            }
+
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<CarResponse>> GetCarById(int id)
+    {
+        try
+        {
+            var car = await carService.GetCarById(id);
+
+            var response = new CarResponse(
+                car.Id, car.IdentityCode, car.Model, car.YearOfEdition, car.BodyType,
+                car.Color, car.Engine, car.FuelConsumption,car.Price,
+                car.IsAvailable,car.PorscheCenterId, car.Photos);
+            
             return Ok(response);
         }
         catch (Exception e)

@@ -20,7 +20,7 @@ public class PorscheCenterController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<PorscheCenterResponse>>> GetAllPorscheCentres()
+    public async Task<ActionResult<List<PorscheCenterResponse>>> GetAllPorscheCenters()
     {
         try
         {
@@ -29,6 +29,24 @@ public class PorscheCenterController : ControllerBase
             var response = porscheCentres
                 .Select(p => new PorscheCenterResponse(
                     p.Id, p.Name, p.Address, p.Cars));
+
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    } 
+    
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<PorscheCenterResponse>> GetPorscheCenterById (int id)
+    {
+        try
+        {
+            var porscheCenter = await porscheCenterService.GetPorscheCenterById(id);
+
+            var response = new PorscheCenterResponse(porscheCenter.Id, porscheCenter.Name,
+                porscheCenter.Address, porscheCenter.Cars);
 
             return Ok(response);
         }

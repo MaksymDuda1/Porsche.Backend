@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Porsche.API.Contracts;
 using Porsche.Application.Abstractions;
+using Porsche.Application.Contracts;
 using Porsche.Domain.Models;
 
 namespace Porsche.API.Controllers;
@@ -22,10 +23,11 @@ public class SearchController : ControllerBase
         try
         {
             var suitableCars = await searchService.SearchCars(request);
-
+            
             var response = suitableCars
                 .Select(c => new CarResponse(c.Id, c.IdentityCode, c.Model, c.YearOfEdition,
-                    c.BodyType, c.Color, c.Engine, c.Price, c.PorscheCenterId, c.Photos)).ToList();
+                    c.BodyType, c.Color, c.Engine,  c.FuelConsumption, c.Price,
+                    c.IsAvailable, c.PorscheCenterId, c.Photos)).ToList();
 
             if (response.Count == 0)
             {
@@ -36,7 +38,7 @@ public class SearchController : ControllerBase
         }
         catch (Exception e)
         {
-            return BadRequest(e.Message);
+            return BadRequest(new { message = e.Message });
         }
     }
 }
