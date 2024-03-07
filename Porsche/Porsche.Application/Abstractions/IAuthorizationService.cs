@@ -1,10 +1,12 @@
+using Porsche.API.Contracts;
+using Porsche.Application.Contracts;
 using Porsche.Domain.Models;
 
-namespace Porsche.Domain.Abstractions;
+namespace Porsche.Application.Abstractions;
 
 public interface IAuthorizationUserService
 {
-    Task<string> RegisterUser(RegisterModel user);
+    Task<string> RegisterUser(RegisterRequest user);
 
-    Task<string> LoginUser(LoginModel user);
+    Task<string> LoginUser(LoginRequest user);
 }

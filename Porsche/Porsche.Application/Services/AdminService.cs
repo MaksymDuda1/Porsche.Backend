@@ -1,3 +1,6 @@
+using Porsche.API.Contracts;
+using Porsche.Application.Abstractions;
+using Porsche.Application.Contracts;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure.Entities;
 using Porsche.Infrastructure.Repositories;
@@ -13,34 +16,72 @@ public class AdminService : IAdminService
         this.adminRepository = adminRepository;
     }
     
-    public Task<int> AddCar(CarEntity car)
+    public async Task<int> AddCar(CarRequest request)
     {
-        return adminRepository.AddCar(car);
+        var car = new CarEntity()
+        {
+            IdentityCode = request.IdentityCode,
+            Model = request.Model,
+            YearOfEdition = request.YearOfEdition,
+            BodyType = request.BodyType,
+            Color = request.Color,
+            Engine = request.Engine
+        };
+        
+
+        var photos = request.Photos.Select(p => new CarPhotoEntity()
+        {
+            Path = p.Path,
+            Car = car
+        });
+
+        car.Photos = photos.ToList();
+
+        return await adminRepository.AddCar(car);
     }
 
-    public Task<int> UpdateCar(CarEntity car)
+    public async Task<int> UpdateCar(CarRequest request)
     {
-        return adminRepository.UpdateCar(car);
+        var car = new CarEntity()
+        {
+            IdentityCode = request.IdentityCode,
+            Model = request.Model,
+            YearOfEdition = request.YearOfEdition,
+            BodyType = request.BodyType,
+            Color = request.Color,
+            Engine = request.Engine
+        };
+
+        var photos = request.Photos.Select(p => new CarPhotoEntity()
+        {
+            Path = p.Path,
+            Car = car
+        });
+
+        car.Photos = photos.ToList();
+        
+        return await adminRepository.UpdateCar(car);
     }
 
-    public Task<int> DeleteCar(int id)
+    public async Task<int> DeleteCar(int id)
     {
-        return adminRepository.DeleteCar(id);
-    }
-
-    public Task<int> CreateUser(RegisterModel user, string roleName)
-    {
-        return adminRepository.CreateUser(user, roleName);
+        return await adminRepository.DeleteCar(id);
     }
     
-    public Task<int> UpdateUser(UserEntity user, string roleName)
-    {
-        return adminRepository.UpdateUser(user, roleName);
-    }
-
     public Task<int> DeleteUser(int id)
     {
         return adminRepository.DeleteUser(id);
     }
-    
+
+    public async Task<int> UpdateRole(RoleUpdateRequest request)
+    {
+        var roleUpdateModel = new RoleUpdate()
+        {
+            UserId = request.UserId,
+            Role = request.Role
+        };
+
+        return await adminRepository.UpdateRole(roleUpdateModel);
+    }
+
 }

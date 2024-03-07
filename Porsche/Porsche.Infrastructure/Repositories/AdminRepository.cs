@@ -11,7 +11,6 @@ public class AdminRepository : IAdminRepository
 {
     private readonly PorscheDbContext context;
     private readonly UserManager<UserEntity> userManager;
-    private readonly IAuthorizationUserService authorizationUserService;
 
     public AdminRepository(PorscheDbContext context, UserManager<UserEntity> userManager )
     {
@@ -23,53 +22,15 @@ public class AdminRepository : IAdminRepository
     {
         if (car == null)
             throw new Exception();
-        
-        var carEntity = new CarEntity()
-        {
-            IdentityCode = car.IdentityCode,
-            Model = car.Model,
-            BodyType = car.BodyType,
-            YearOfEdition = car.YearOfEdition,
-            Engine = car.Engine,
-        };
 
-        if (car.Photos != null)
-        {
-            var photos = car.Photos.Select(c => new CarPhotoEntity()
-            {
-                Path = c.Path,
-                CarId = c.CarId
-            });
-            
-            carEntity.Photos.AddRange(photos);
-        }
-
-        if (car.PorscheCenter != null)
-        {
-            var porscheCenter = new PorscheCenterEntity()
-            {
-                Name = car.PorscheCenter.Name,
-                Address = car.PorscheCenter.Address
-            };
-
-            carEntity.PorscheCenter = porscheCenter;
-        }
-        
-        if (car == null)
-        {
-            throw new Exception("Wrong input");
-        }
-
-        await context.Cars.AddAsync(carEntity);
+        await context.Cars.AddAsync(car);
         await context.SaveChangesAsync();
 
-        return carEntity.Id;
+        return car.Id;
     }
 
     public async Task<int> UpdateCar(CarEntity car)
     {
-
-        Console.WriteLine(car.Id);
         var existingCar = await context.Cars
             .Include(c => c.PorscheCenter)
             .Include(c => c.Photos)
@@ -81,6 +42,7 @@ public class AdminRepository : IAdminRepository
             existingCar.Model = car.Model;
             existingCar.BodyType = car.BodyType;
             existingCar.Engine = car.Engine;
+            existingCar.FuelConsumption = car.FuelConsumption;
 
             if (existingCar.PorscheCenter != null && car.PorscheCenter != null)
             {
@@ -108,42 +70,7 @@ public class AdminRepository : IAdminRepository
 
         return id;
     }
-
-    public async Task<int> CreateUser(RegisterModel user, string roleName)
-    {
-        var userEntity = new UserEntity
-        {
-            FirstName = user.FirstName,
-            SecondName = user.SecondName,
-            Email = user.Email,
-            PasswordHash = user.Password,
-        };
-
-        await userManager.AddToRoleAsync(userEntity, roleName);
-
-        await context.Users.AddAsync(userEntity);
-        await context.SaveChangesAsync();
-
-        return userEntity.Id;
-    }
     
-    public async Task<int> UpdateUser(UserEntity user, string roleName)
-    {
-        await context.Users
-            .Where(p => p.Id == user.Id)
-            .ExecuteUpdateAsync(s => s
-                .SetProperty(p => p.Id, p => user.Id)
-                .SetProperty(p => p.FirstName, p => user.FirstName)
-                .SetProperty(p => p.SecondName, p => user.SecondName)
-                .SetProperty(p => p.Email, p => user.Email)
-                .SetProperty(p => p.PasswordHash, p => user.PasswordHash));
-
-        await userManager.AddToRoleAsync(user, roleName);
-        await context.SaveChangesAsync();
-
-        return user.Id;
-    }
-
     public async Task<int> DeleteUser(int id)
     {
         await context.Users
@@ -153,10 +80,15 @@ public class AdminRepository : IAdminRepository
         return id;
     }
 
-    public async Task<int> UpdateRole(UserEntity user, string roleName)
+    public async Task<int> UpdateRole(RoleUpdate roleUpdate)
     {
-        await userManager.AddToRoleAsync(user, roleName);
+        var user = await context.Users.FindAsync(roleUpdate.UserId);
 
-        return user.Id;
+        if (user == null)
+            throw new Exception();
+        
+        await userManager.AddToRoleAsync(user, roleUpdate.Role);
+
+        return roleUpdate.UserId;
     }
 }

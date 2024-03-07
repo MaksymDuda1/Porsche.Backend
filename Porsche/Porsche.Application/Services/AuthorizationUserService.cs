@@ -2,6 +2,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Porsche.API.Contracts;
+using Porsche.Application.Abstractions;
+using Porsche.Application.Contracts;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure.Entities;
@@ -22,35 +25,45 @@ public class AuthorizationUserService : IAuthorizationUserService
         this.signInManager = signInManager;
     }
 
-    public async Task<string> RegisterUser(RegisterModel registerModel)
+    public async Task<string> RegisterUser(RegisterRequest request)
     {
-        string userName = registerModel.Email;
+        string userName = request.Email;
 
         var user = new UserEntity()
         {
-            Email = registerModel.Email,
+            Email = request.Email,
             UserName = userName,
-            FirstName = registerModel.FirstName,
-            SecondName = registerModel.SecondName
+            FirstName = request.FirstName,
+            SecondName = request.SecondName
         };
-
-        Console.WriteLine(user.Email, user.SecondName);
-
-        var result = await userManager.CreateAsync(user, registerModel.Password);
+        
+        var result = await userManager.CreateAsync(user, request.Password);
 
         if (result.Succeeded)
         {
-            await userManager.AddToRoleAsync(user, "ADMIN");
-            var claims = await userManager.GetClaimsAsync(user);
-            
-            return tokenService.CreateToken(claims);
+            var authClaims = new List<Claim>
+            {
+                new(ClaimTypes.Email, user.Email),
+                new(JwtRegisteredClaimNames.Jti, user.Id.ToString())
+            };
+
+            var roles = await userManager.GetRolesAsync(user);
+            tokenService.AddRolesToClaims(authClaims, roles);
+
+            return tokenService.CreateToken(authClaims);
         }
 
         throw new AuthenticationException("User already exists");
     }
 
-    public async Task<string> LoginUser(LoginModel loginModel)
+    public async Task<string> LoginUser(LoginRequest request)
     {
+        var loginModel = new LoginModel()
+        {
+            Email = request.Email,
+            Password = request.Password
+        };        
+        
         var userByEmail = await userManager.FindByEmailAsync(loginModel.Email);
 
         if (userByEmail == null)

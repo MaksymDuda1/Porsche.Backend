@@ -1,6 +1,5 @@
 namespace Porsche.Application.Contracts;
 
-public class AddCarToSavedRequest
-{
-    
-}
+public record AddCarToSavedRequest(
+    int CarId,
+    int UserId);

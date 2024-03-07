@@ -1,6 +1,7 @@
-using Porsche.Domain.Abstractions;
+using Microsoft.IdentityModel.Tokens;
+using Porsche.Application.Abstractions;
+using Porsche.Application.Contracts;
 using Porsche.Domain.Models;
-using Porsche.Infrastructure.Abstractions;
 using Porsche.Infrastructure.Entities;
 
 namespace Porsche.Application.Services;
@@ -14,36 +15,55 @@ public class SearchService : ISearchService
     {
         this.carService = carService;
     }
-
-    public async Task GetAllCars()
+    
+    public async Task<List<CarEntity>> SearchCars(SearchRequest request)
     {
-        this.cars =  await carService.GetAllCars();
-    }
+        var parameters = new SearchModel()
+        {
+            Model = request.Model,
+            BodyType = request.BodyType,
+            Colors = request.Color,
+            MinYearOfRelease = request.MinYearOfRelease,
+            MaxYearOfRelease = request.MaxYearOfRelease,
+            Engine = request.Engine,
+            MinPrice = request.MinPrice,
+            MaxPrice = request.MaxPrice,
+            PorscheCenter = request.PorscheCenter
+        };
 
-    public async Task<List<CarEntity>> SearchCars(SearchModel searchModel)
-    {
+        Console.WriteLine(parameters.Model);
+        
         cars = await carService.GetAllCars();
 
         var query = cars.AsQueryable(); 
 
-        if (searchModel.Model != null)
-            query = query.Where(c => c.Model == searchModel.Model);
+        if (!parameters.Model.IsNullOrEmpty())
+            query = query.Where(c => c.Model == parameters.Model);
+        
+        if (parameters.BodyType.Length != 0) 
+            query = query.Where(c => parameters.BodyType.Contains(c.BodyType));
+    
+        if (parameters.Colors.Length != 0) 
+            query = query.Where(c => parameters.Colors.Contains(c.Color));
+        
+        if (parameters.MinYearOfRelease != 0) 
+            query = query.Where(c => c.YearOfEdition >= parameters.MinYearOfRelease);
+        
+        if (parameters.MaxYearOfRelease != 0) 
+            query = query.Where(c => c.YearOfEdition <= parameters.MaxYearOfRelease);
+        
+        if (parameters.MinPrice != 0) 
+            query = query.Where(c => c.Price >= parameters.MinPrice);
+        
+        if (parameters.MaxPrice != 0) 
+            query = query.Where(c => c.Price <= parameters.MaxPrice);
+        
+        if (parameters.Engine.Length != 0) 
+            query = query.Where(c => parameters.Engine.Contains(c.Engine));
+        
+        if (parameters.PorscheCenter.Length != 0) 
+            query = query.Where(c => parameters.PorscheCenter.Contains(c.PorscheCenter.Name));
 
-        if (searchModel.BodyType != null) 
-            query = query.Where(c => c.BodyType == searchModel.BodyType);
-        
-        if (searchModel.MinYearOfRelease != null) 
-            query = query.Where(c => c.YearOfEdition >= searchModel.MinYearOfRelease);
-        
-        if (searchModel.MaxYearOfRelease != null) 
-            query = query.Where(c => c.YearOfEdition <= searchModel.MaxYearOfRelease);
-        
-        if (searchModel.Engine != null) 
-            query = query.Where(c => c.Engine == searchModel.Engine);
-        
-        if (searchModel.PorscheCenter != null) 
-            query = query.Where(c => c.PorscheCenter.Name == searchModel.PorscheCenter);
-        
         return query.ToList();
     }
 }

@@ -1,6 +1,5 @@
 namespace Porsche.Application.Contracts;
 
-public class GetSavedResponse
-{
+public record GetSavedResponse(
     
-}
+    );

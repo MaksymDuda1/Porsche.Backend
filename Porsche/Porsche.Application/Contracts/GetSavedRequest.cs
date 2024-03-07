@@ -1,3 +1,5 @@
 namespace Porsche.Application.Contracts;
 
-public record GetSavedRequest();
+public record GetSavedRequest(
+    int UserId
+    );

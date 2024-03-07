@@ -6,7 +6,10 @@ namespace Porsche.Domain.Abstractions;
 public interface IUserRepository
 {
     Task<List<UserEntity>> Get();
-    Task<int> Create(RegisterModel user);
-    Task<int> Update(UserEntity user);
-    Task<int> Delete(int id);
+    Task<UserEntity> GetById(int id); 
+    Task<bool> AddCarToSaved(AddingCarToSaved usersCars);
+    Task<List<CarEntity>> GetSavedCars(int id);
+
+    Task<int> AddPhoto(int userId, UserPhotoEntity photo);
+
 }

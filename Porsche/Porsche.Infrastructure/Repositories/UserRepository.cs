@@ -18,73 +18,74 @@ public class UserRepository : IUserRepository
     public async Task<List<UserEntity>> Get()
     {
         var userEntities = await context.Users
+            .Include(u => u.Photo)
             .AsNoTracking()
             .ToListAsync();
         
         return userEntities;
     }
-    public async Task<int> Create(RegisterModel user)
+
+    public async Task<UserEntity> GetById(int id)
     {
-        var userEntity = new UserEntity
-        {
-            FirstName = user.FirstName,
-            SecondName = user.SecondName,
-            Email = user.Email,
-            PasswordHash = user.Password,
-        };
+        var user = await context.Users.FindAsync(id);
 
-        await context.Users.AddAsync(userEntity);
-        await context.SaveChangesAsync();
+        if (user == null)
+            throw new Exception("User not found");
 
-        return userEntity.Id;
+        return user;
+
     }
-    public async Task<int> Update(UserEntity user)
+
+    public async Task<int> AddPhoto(int userId, UserPhotoEntity photo)
     {
-        await context.Users
-            .Where(p => p.Id == user.Id)
-            .ExecuteUpdateAsync(s => s
-                .SetProperty(p => p.Id, p => user.Id)
-                .SetProperty(p => p.FirstName, p => user.FirstName)
-                .SetProperty(p => p.SecondName, p => user.SecondName)
-                .SetProperty(p => p.Email, p => user.Email)
-                .SetProperty(p => p.PasswordHash, p => user.PasswordHash));
+        var user = await context.Users.FindAsync(userId);
+
+        if (user == null)
+            throw new Exception("User does not exist");
+
+        if (user.Photo == null)
+            user.Photo = new UserPhotoEntity();
+        
+        user.Photo = photo;
 
         await context.SaveChangesAsync();
 
         return user.Id;
     }
 
-    public async Task<int> Delete(int id)
+    public async Task<bool> AddCarToSaved(AddingCarToSaved addingCarToSaved)
     {
-        await context.Users
-            .Where(p => p.Id == id)
-            .ExecuteDeleteAsync();
+        var car = await context.Cars.FindAsync(addingCarToSaved.CarId);
+        var user = await context.Users.FindAsync(addingCarToSaved.UserId);
 
-        return id;
-    }
-    
-    /*public async Task<int> AddPhoto(int id, Photo photo)
-    {
-        var existingUser = await context.Users.FindAsync(id);
-
-        if (existingUser == null)
-        {
-            throw new Exception("Car do not exist");
-        }
-
-        var newPhoto = new Photo()
-        {
-            Address = photo.Address,
-        };
-
-        /*if (existingCar.Photos == null)
-        {
-            existingCar.Photos = new List<Photo>();
-        }#1#
+        if (car == null)
+            throw new Exception("Wrong car id");
         
-        existingUser..Add(newPhoto);
+        if (user == null)
+            throw new Exception("Wrong user id");
+
+        if (user.SavedCars == null)
+            user.SavedCars = new List<CarEntity>();
+        
+        if (car.Users == null)
+            car.Users = new List<UserEntity>();
+        
+        user.SavedCars.Add(car);
+        car.Users.Add(user);
+        
         await context.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<List<CarEntity>> GetSavedCars(int id)
+    {
+        var cars = await context.Cars
+            .Where(c => c.Users.Any(u => u.Id == id)).ToListAsync();
+
+        if (cars == null)
+            throw new Exception("You have no saved cars");
         
-        return existingUser.Id;
-    }*/
+        return cars;
+    }
 }

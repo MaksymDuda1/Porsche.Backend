@@ -1,9 +1,9 @@
 using Amazon.S3.Model;
 using Microsoft.AspNetCore.Http;
 
-namespace Porsche.Application.Services;
+namespace Porsche.Application.Abstractions;
 
 public interface IUserImageService
 {
-    Task<PutObjectResponse> UploadImage(int id, IFormFile file);
+    Task<int> UploadImage(int id, IFormFile file);
 }

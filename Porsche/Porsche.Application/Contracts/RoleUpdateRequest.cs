@@ -1,6 +1,6 @@
 namespace Porsche.Application.Contracts;
 
-public class RoleUpdateRequest
-{
-    
-}
+public record RoleUpdateRequest(
+    int UserId,
+    string Role
+    );

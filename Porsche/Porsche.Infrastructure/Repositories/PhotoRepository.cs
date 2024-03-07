@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+/*using Microsoft.EntityFrameworkCore;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure.Entities;
 
@@ -57,4 +57,4 @@ public class PhotoRepository
 
         return existingUser.Id;
     }
-}
+}*/

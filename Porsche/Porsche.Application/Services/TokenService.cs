@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Porsche.Application.Abstractions;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure;

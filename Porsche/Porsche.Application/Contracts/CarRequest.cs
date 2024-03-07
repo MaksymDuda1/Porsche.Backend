@@ -1,15 +1,17 @@
 using Porsche.Domain.Enums;
-using Porsche.Domain.Models;
 using Porsche.Infrastructure.Entities;
 
-namespace Porsche.API.Contracts;
+namespace Porsche.Application.Contracts;
 
 public record CarRequest(
-    int Id,
     string IdentityCode,
     string Model,
     int YearOfEdition,
     BodyType BodyType,
-    EngineEntity Engine,
+    Color Color,
+    string Engine,
+    float FuelConsumption,
+    float Price,
     PorscheCenterEntity? PorscheCenter,
-    List<CarPhotoEntity>? Photos);
+    List<CarPhotoEntity>? Photos
+    );

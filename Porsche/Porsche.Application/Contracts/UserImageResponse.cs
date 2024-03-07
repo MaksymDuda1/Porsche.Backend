@@ -1,6 +1,6 @@
 namespace Porsche.Application.Contracts;
 
-public class UserImageResponse
-{
-    
-}
+public record UserImageResponse
+(
+    string Path
+);

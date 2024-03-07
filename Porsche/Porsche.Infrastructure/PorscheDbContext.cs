@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure.Entities;
 
@@ -13,10 +14,10 @@ public class PorscheDbContext : IdentityDbContext<UserEntity, RoleEntity, int>
     {
     }
 
-    public DbSet<UserEntity> Users { get; set; }
+    public DbSet<UserEntity> Users { get; set; } 
     public DbSet<CarEntity> Cars { get; set; }
-
     public DbSet<CarPhotoEntity> CarPhotos { get; set; }
+    
     public DbSet<UserPhotoEntity> UserPhotos { get; set; }
     public DbSet<PorscheCenterEntity> PorscheCenters { get; set; }
 
@@ -38,16 +39,5 @@ public class PorscheDbContext : IdentityDbContext<UserEntity, RoleEntity, int>
                     Name = "Admin",
                     NormalizedName = "ADMIN"
                 });
-        ;
-
-        modelBuilder.Entity<CarEntity>()
-            .HasData(new CarEntity()
-            {
-                Id = 88,
-                IdentityCode = "someIdentityCode",
-                Model = "911",
-                BodyType = 0,
-                Engine = "someEngine"
-            });
     }
 }

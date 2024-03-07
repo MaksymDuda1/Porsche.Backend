@@ -3,7 +3,7 @@ using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure.Entities;
 
-namespace Porsche.Domain.Abstractions;
+namespace Porsche.Application.Abstractions;
 
 public interface ITokenService
 {

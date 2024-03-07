@@ -1,3 +1,5 @@
+using Porsche.Application.Abstractions;
+using Porsche.Application.Contracts;
 using Porsche.Domain.Abstractions;
 using Porsche.Domain.Models;
 using Porsche.Infrastructure.Entities;
@@ -18,18 +20,19 @@ public class UserService : IUserService
         return await userRepository.Get();
     }
 
-    public async Task<int> CreateUser(RegisterModel user)
+    public async Task<bool> AddCarToSaved(AddCarToSavedRequest request)
     {
-        return await userRepository.Create(user);
+        var entity = new AddingCarToSaved()
+        {
+            CarId = request.CarId,
+            UserId = request.UserId
+        };
+
+        return await userRepository.AddCarToSaved(entity);
     }
 
-    public async Task<int> UpdateUser(UserEntity user)
+    public async Task<List<CarEntity>> GetSavedCars(int id)
     {
-        return await userRepository.Update(user);
-    }
-
-    public async Task<int> DeleteUser(int id)
-    {
-        return await userRepository.Delete(id);
+        return await userRepository.GetSavedCars(id);
     }
 }

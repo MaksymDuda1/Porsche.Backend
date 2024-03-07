@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Threading.Channels;
 using Microsoft.EntityFrameworkCore;
 using Porsche.Domain.Abstractions;
@@ -28,44 +30,42 @@ public class PorscheCenterRepository : IPorscheCenterRepository
                 Id = p.Id,
                 Name = p.Name,
                 Address = p.Address,
-                Cars = p.Cars.ToList()
+                Cars = p.Cars
             }).ToList();
 
         return porscheCenters;
     }
 
-    public async Task<int> Create(PorscheCenterEntity porscheCenter)
+    public async Task<PorscheCenterEntity> GetById(int id)
     {
-        var porscheCenterEntity = new PorscheCenterEntity()
+        var porscheCenter = await context.PorscheCenters.FindAsync(id);
+
+        if (porscheCenter == null)
         {
-            Id = porscheCenter.Id,
-            Name = porscheCenter.Name,
-            Address = porscheCenter.Address,
-        };
+            throw new Exception("Porsche Center doesn't exist");
+        }
 
-        var cars = porscheCenter.Cars?
-            .Select(c => new CarEntity()
-            {
-                IdentityCode = c.IdentityCode, Model = c.Model, BodyType = c.BodyType,
-                Engine = c.Engine, Photos = c.Photos, PorscheCenter = porscheCenterEntity
-            }).ToList();
-                
-        porscheCenterEntity.Cars = cars;
-
-        await context.AddAsync(porscheCenterEntity);
-        await context.SaveChangesAsync();
-
-        return porscheCenterEntity.Id;
+        return porscheCenter;
     }
 
-    public async Task<int> AddCar(int porscheCenterId, CarEntity car)
+    public async Task<int> Create(PorscheCenterEntity porscheCenter)
     {
-        var existingPorscheCenter = await context.PorscheCenters.FindAsync(porscheCenterId);
+        
+        await context.AddAsync(porscheCenter);
+        await context.SaveChangesAsync();
+
+        return porscheCenter.Id;
+    }
+
+    public async Task<int> AddCar(AddingCarToPorscheCenter carAdding)
+    {
+        var existingPorscheCenter = await context.PorscheCenters.FindAsync(carAdding.PorscheCenterId);
 
         if (existingPorscheCenter == null)
             throw new Exception("Porsche center don't exists");
-
-
+        
+        var car = await context.Cars.FindAsync(carAdding.CarId);
+        
         if (car == null)
             throw new Exception("Wrong input");
 

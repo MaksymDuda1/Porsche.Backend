@@ -12,6 +12,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Reference Include="AWSSDK.S3">
+        <HintPath>..\..\..\..\..\..\.nuget\packages\awssdk.s3\3.7.305.28\lib\net8.0\AWSSDK.S3.dll</HintPath>
+      </Reference>
       <Reference Include="Microsoft.IdentityModel.Tokens">
         <HintPath>..\..\..\..\..\..\.nuget\packages\microsoft.identitymodel.tokens\7.1.2\lib\net8.0\Microsoft.IdentityModel.Tokens.dll</HintPath>
       </Reference>
@@ -21,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="AWSSDK.S3" Version="3.7.305.28" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.1" />
     </ItemGroup>
