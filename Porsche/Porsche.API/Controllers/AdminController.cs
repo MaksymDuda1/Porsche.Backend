@@ -11,7 +11,6 @@ namespace Porsche.API.Controllers;
 
 [ApiController]
 [Authorize(Roles = "Admin")]
-[Route("admin")]
 public class AdminController : ControllerBase
 {
     private readonly IAdminService adminService;
@@ -52,7 +51,7 @@ public class AdminController : ControllerBase
     {
         try
         {
-            return await adminService.DeleteCar(id);
+            return Ok(await adminService.DeleteCar(id));
         }
         catch (Exception e)
         {
@@ -60,9 +59,22 @@ public class AdminController : ControllerBase
         }
     }
 
-
     [Route("api/admin/users")]
-    [HttpDelete("{id:int}")]
+    [HttpPut]
+    public async Task<ActionResult<int>> UpdateUserRole(RoleUpdateRequest request)
+    {
+        try
+        {
+            Console.WriteLine("Hello");
+            return Ok(await adminService.UpdateRole(request));
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+
+    [HttpDelete("api/admin/users/{id:int}")]
     public async Task<ActionResult<int>> DeleteUser(int id)
     {
         try

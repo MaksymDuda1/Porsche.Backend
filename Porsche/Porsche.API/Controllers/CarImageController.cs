@@ -16,9 +16,9 @@ public class CarImageController: ControllerBase
     [HttpPost("api/carImages/{id:int}")]
     public async Task<IActionResult> UploadPhoto(int id, [FromForm(Name = "Data")] IFormFile file)
     {
-        var response = await carImageService.UploadImage(id, file);
+       await carImageService.UploadImage(id, file);
         
-        return Ok(response);
+        return Ok();
     }
 
     [HttpDelete("{id:int}")]

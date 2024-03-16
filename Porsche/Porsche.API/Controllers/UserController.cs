@@ -25,12 +25,8 @@ public class UserController : ControllerBase
         try
         {
             var users = await userService.GetAllUsers();
-
-            var response = users
-                .Select(u => new UserResponse(u.Id, u.FirstName, u.SecondName,
-                    u.Email, u.PasswordHash, u.Photo));
-
-            return Ok(response);
+            
+            return Ok(users);
         }
         catch (Exception e)
         {
