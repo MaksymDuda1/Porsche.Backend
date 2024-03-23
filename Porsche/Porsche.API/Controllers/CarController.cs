@@ -32,12 +32,6 @@ public class CarController : ControllerBase
                     c.Id, c.IdentityCode, c.Model, c.YearOfEdition, c.BodyType,
                     c.Color, c.Engine, c.FuelConsumption ,c.Price,c.IsAvailable, c.PorscheCenterId, c.Photos)
                 );
-
-            foreach (var carResponse in response)
-            {
-                Console.WriteLine(carResponse.PorscheCenterId);
-            }
-
             return Ok(response);
         }
         catch (Exception e)

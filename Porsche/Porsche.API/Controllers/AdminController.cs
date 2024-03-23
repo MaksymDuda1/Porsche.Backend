@@ -65,7 +65,6 @@ public class AdminController : ControllerBase
     {
         try
         {
-            Console.WriteLine("Hello");
             return Ok(await adminService.UpdateRole(request));
         }
         catch (Exception e)

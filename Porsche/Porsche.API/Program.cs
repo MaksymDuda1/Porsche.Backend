@@ -8,6 +8,7 @@ using Porsche.Application.Abstractions;
 using Porsche.Application.Services;
 using Porsche.Domain.Abstractions;
 using Porsche.Infrastructure;
+using Porsche.Infrastructure.Abstractions;
 using Porsche.Infrastructure.Entities;
 using Porsche.Infrastructure.Repositories;
 
